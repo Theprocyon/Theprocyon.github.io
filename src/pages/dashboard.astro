@@ -1,0 +1,19 @@
+---
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import { Content as DashboardLinks } from "../data/dashboard.md";
+import { DASHBOARD } from "@consts";
+---
+
+<PageLayout title={DASHBOARD.TITLE} description={DASHBOARD.DESCRIPTION} lang="en">
+  <Container>
+    <div class="space-y-8">
+      <h1 class="animate text-xl font-semibold text-black dark:text-white">
+        Dashboard
+      </h1>
+      <article class="animate" aria-label="Personal links">
+        <DashboardLinks />
+      </article>
+    </div>
+  </Container>
+</PageLayout>

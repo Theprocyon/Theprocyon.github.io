@@ -12,21 +12,15 @@ import { SITE } from "@consts";
           {SITE.NAME}
         </div>
       </Link>
-      <nav class="flex gap-1">
-        <Link href="/blog">
-          blog
-        </Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/work">
-          work
-        </Link>
-        <span>
-          {`/`}
-        </span>
+      <nav class="flex gap-1" aria-label="Main navigation">
         <Link href="/projects">
-          projects
+          Project
+        </Link>
+        <span aria-hidden="true">
+          {`/`}
+        </span>
+        <Link href="/dashboard">
+          Dashboard
         </Link>
       </nav>
     </div>

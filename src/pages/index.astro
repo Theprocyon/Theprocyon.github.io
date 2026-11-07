@@ -1,157 +1,112 @@
 ---
-import { getCollection } from "astro:content";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
-import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
-import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
-
-const blog = (await getCollection("blog"))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
-
-const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_PROJECTS_ON_HOMEPAGE);
-
-const allwork = (await getCollection("work"))
-  .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf())
-  .slice(0,SITE.NUM_WORKS_ON_HOMEPAGE);
-
-const work = await Promise.all(
-  allwork.map(async (item) => {
-    const { Content } = await item.render();
-    return { ...item, Content };
-  })
-);
-
 ---
 
-<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION} lang="en">
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      Hi, I'm Nano <span class="text-xl">👋🏻</span> 
-    </h4>
-    <div class="space-y-16">
-      <section>
-        <article class="space-y-4">
-          <p class="animate">
-            I am a minimal, seo friendly, accessible portfolio and blog for developers. 
-            I am an even more lightweight version of my popular theme
-            <Link href="https://github.com/markhorn-dev/astro-sphere" aria-label="Astro Sphere on Github" external>
-              Astro Sphere
-            </Link>.
-            I have a lighthouse scores of 100 across the board for performance, 
-            accesibility, best practices and SEO.
-          </p>
-          <p class="animate">
-            I come packed with full type safety, a sitemap, an rss feed, markdown 
-            and mdx support (use components in your markdown) through astro integrations.
-            I am styled with tailwind and come preconfigured with light, dark and 
-            system/os theme preferences out of the box.
-          </p>
-          <p class="animate">
-            Visit
-            <Link href="https://github.com/markhorn-dev/astro-nano" aria-label="Astro Nano on Github" external>
-              Astro Nano on Github
-            </Link>
-            to fork the repository, read the docs or one-click deploy on Vercel or Netlify. 
-          </p>
-        </article>
+    <div class="space-y-10">
+      <section class="animate space-y-5" aria-labelledby="profile-heading">
+        <div class="space-y-2">
+          <h1 id="profile-heading" class="text-3xl font-semibold text-black dark:text-white">
+            {SITE.NAME}
+          </h1>
+          <p lang="en">Embedded Control Systems Engineer</p>
+        </div>
+        <dl class="grid gap-x-4 gap-y-2 sm:grid-cols-[7rem_1fr]">
+          <dt class="text-sm">2018–2025</dt>
+          <dd>Electrical Engineering @ Inha University</dd>
+          <dt class="text-sm">2021–2023</dt>
+          <dd>Hardware Engineer @ Vorasky Inc.</dd>
+          <dt class="text-sm">2026–Present</dt>
+          <dd>
+            Integrated Ph.D. Course @
+            <Link href="https://epcl.inha.ac.kr" external>EPCL</Link>
+          </dd>
+        </dl>
+        <p>
+          <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
+            {SITE.EMAIL}
+          </Link>
+        </p>
       </section>
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Latest posts
-          </h5>
-          <Link href="/blog">
-            See all posts
-          </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {blog.map(post => (
-            <li>
-              <ArrowCard entry={post} />
-            </li>
-          ))}
+      <section class="animate space-y-3" aria-labelledby="interests-heading">
+        <h2 id="interests-heading" class="text-lg font-semibold text-black dark:text-white">
+          Current Focus
+        </h2>
+        <ul class="list-disc space-y-1 pl-5">
+          <li>High-performance motor drive &amp; power conversion</li>
+          <li>Real-time systems and computer architecture</li>
+          <li>Control theory</li>
+          <li>Rust</li>
         </ul>
       </section>
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Work Experience
-          </h5>
-          <Link href="/work">
-            See all work
-          </Link>
-        </div>
-        <ul class="flex flex-col space-y-4">
-          {work.map(entry => (
-            <li>
-              <div class="text-sm opacity-75">
-                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-              </div>
-              <div class="font-semibold text-black dark:text-white">
-                {entry.data.company}
-              </div>
-              <div class="text-sm opacity-75">
-                {entry.data.role}
-              </div>
-              <article>
-                <entry.Content />
-              </article>
-            </li>
-          ))}
-        </ul>
+      <section class="animate space-y-3" aria-labelledby="skills-heading">
+        <h2 id="skills-heading" class="text-lg font-semibold text-black dark:text-white">
+          Skills
+        </h2>
+        <dl class="space-y-3">
+          <div>
+            <dt class="font-semibold text-black dark:text-white">Embedded &amp; Hardware</dt>
+            <dd>MCU/DSP · High-power &amp; high-speed PCB design · EMC · Zynq/Linux</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-black dark:text-white">FPGA &amp; Digital Logic</dt>
+            <dd>Verilog · SystemVerilog · Vitis HLS</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-black dark:text-white">Application</dt>
+            <dd>C · C++ · C# (.NET) · WPF</dd>
+          </div>
+        </dl>
       </section>
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Recent projects
-          </h5>
-          <Link href="/projects">
-            See all projects
-          </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {projects.map(project => (
-            <li>
-              <ArrowCard entry={project} />
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">
-          Let's Connect
-        </h5>
-        <article>
-          <p>
-            If you want to get in touch with me about something or just to say hi,
-            reach out on social media or send me an email.
-          </p>
-        </article>
-        <ul class="flex flex-wrap gap-2">
-          {SOCIALS.map(SOCIAL => (
-            <li class="flex gap-x-2 text-nowrap">
-              <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}>
-                {SOCIAL.NAME}
+      <section class="animate space-y-3" aria-labelledby="publications-heading">
+        <h2 id="publications-heading" class="text-lg font-semibold text-black dark:text-white">
+          Publications
+        </h2>
+        <ul class="space-y-5">
+          <li class="space-y-1">
+            <p lang="en">
+              <Link href="https://doi.org/10.23919/IPEC-Nagasaki2026-EC64663.2026.11597195" external>
+                Effect of BPF Dynamics on Stability of High-Frequency Signal-Injection Sensorless Control
               </Link>
-              {"/"}
+            </p>
+            <p class="text-sm" lang="en">IPEC 2026 (ECCE-Asia)</p>
+            <p class="text-sm font-semibold text-black dark:text-white" lang="en">
+              Outstanding Paper Award
+            </p>
+          </li>
+          <li class="space-y-1">
+            <p lang="en">
+              <Link href="https://doi.org/10.6113/TKPE.2026.31.2.126" external>
+                Bidirectional On-State Voltage Measurement Circuit and Method with Enhanced Real-Time Capability for High-Voltage Power Semiconductor Devices
+              </Link>
+            </p>
+            <p class="text-sm" lang="en">
+              The Transactions of the Korean Institute of Power Electronics<br />
+              31(2), 126–134, 2026
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="animate space-y-3" aria-labelledby="external-links-heading">
+        <h2 id="external-links-heading" class="text-lg font-semibold text-black dark:text-white">
+          External Links
+        </h2>
+        <ul class="list-disc pl-5">
+          {SOCIALS.map(social => (
+            <li>
+              <Link href={social.HREF} external aria-label={`${SITE.NAME} on ${social.NAME}`}>
+                {social.NAME}
+              </Link>
             </li>
           ))}
-          <li class="line-clamp-1">
-            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
-              {SITE.EMAIL}
-            </Link>
-          </li>
         </ul>
       </section>
     </div>
