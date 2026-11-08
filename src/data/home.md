@@ -1,5 +1,5 @@
 # Theprocyon
-  
+     
 
 **Embedded Control Systems Engineer**
 
@@ -13,24 +13,27 @@
 
 ## Current Focus
 
-- High-performance motor drive & power conversion
+- High-performance motor drive
 - Computer architecture (Real-time systems)
 
 ---
 
 ## Skills
 
-### Embedded & Hardware
+### Hardware Desgin
+- **PCB Design** : High Power & High Speed Artwork, EMC (Altium, KiCad)
 
-MCU/DSP · High-power & high-speed PCB design · EMC · Zynq/Linux
+### Embedded System
+- **MCU** : Cortex-M, TI C28x based MCUs.
+- **SoC/AP** : Embedded Linux (Yocto, U-boot, etc..)
 
 ### FPGA & Digital Logic
-
-Verilog · SystemVerilog · Vitis HLS
+- **HDL** : Verilog, System Verilog
+- **HLS** : Vitis HLS
 
 ### Application
-
-C · C++ · C# (.NET) · WPF
+- **Languages** : C, C++, Rust, C# (.NET)
+- **UI Frameworks** : WPF
 
 ---
 
