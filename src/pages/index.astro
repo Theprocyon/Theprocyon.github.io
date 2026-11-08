@@ -1,114 +1,40 @@
 ---
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
-import Link from "@components/Link.astro";
-import { SITE, HOME, SOCIALS } from "@consts";
+import { Content as HomeContent } from "../data/home.md";
+import { HOME } from "@consts";
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION} lang="en">
   <Container>
-    <div class="space-y-10">
-      <section class="animate space-y-5" aria-labelledby="profile-heading">
-        <div class="space-y-2">
-          <h1 id="profile-heading" class="text-3xl font-semibold text-black dark:text-white">
-            {SITE.NAME}
-          </h1>
-          <p lang="en">Embedded Control Systems Engineer</p>
-        </div>
-        <dl class="grid gap-x-4 gap-y-2 sm:grid-cols-[7rem_1fr]">
-          <dt class="text-sm">2018–2025</dt>
-          <dd>Electrical Engineering @ Inha University</dd>
-          <dt class="text-sm">2021–2023</dt>
-          <dd>Hardware Engineer @ Vorasky Inc.</dd>
-          <dt class="text-sm">2026–Present</dt>
-          <dd>
-            Integrated Ph.D. Course @
-            <Link href="https://epcl.inha.ac.kr" external>EPCL</Link>
-          </dd>
-        </dl>
-        <p>
-          <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
-            {SITE.EMAIL}
-          </Link>
-        </p>
-      </section>
-
-      <section class="animate space-y-3" aria-labelledby="interests-heading">
-        <h2 id="interests-heading" class="text-lg font-semibold text-black dark:text-white">
-          Current Focus
-        </h2>
-        <ul class="list-disc space-y-1 pl-5">
-          <li>High-performance motor drive &amp; power conversion</li>
-          <li>Real-time systems and computer architecture</li>
-          <li>Control theory</li>
-          <li>Rust</li>
-        </ul>
-      </section>
-
-      <section class="animate space-y-3" aria-labelledby="skills-heading">
-        <h2 id="skills-heading" class="text-lg font-semibold text-black dark:text-white">
-          Skills
-        </h2>
-        <dl class="space-y-3">
-          <div>
-            <dt class="font-semibold text-black dark:text-white">Embedded &amp; Hardware</dt>
-            <dd>MCU/DSP · High-power &amp; high-speed PCB design · EMC · Zynq/Linux</dd>
-          </div>
-          <div>
-            <dt class="font-semibold text-black dark:text-white">FPGA &amp; Digital Logic</dt>
-            <dd>Verilog · SystemVerilog · Vitis HLS</dd>
-          </div>
-          <div>
-            <dt class="font-semibold text-black dark:text-white">Application</dt>
-            <dd>C · C++ · C# (.NET) · WPF</dd>
-          </div>
-        </dl>
-      </section>
-
-      <section class="animate space-y-3" aria-labelledby="publications-heading">
-        <h2 id="publications-heading" class="text-lg font-semibold text-black dark:text-white">
-          Publications
-        </h2>
-        <ul class="space-y-5">
-          <li class="space-y-1">
-            <p lang="en">
-              <Link href="https://doi.org/10.23919/IPEC-Nagasaki2026-EC64663.2026.11597195" external>
-                Effect of BPF Dynamics on Stability of High-Frequency Signal-Injection Sensorless Control
-              </Link>
-            </p>
-            <p class="text-sm" lang="en">IPEC 2026 (ECCE-Asia)</p>
-            <p class="text-sm font-semibold text-black dark:text-white" lang="en">
-              Outstanding Paper Award
-            </p>
-          </li>
-          <li class="space-y-1">
-            <p lang="en">
-              <Link href="https://doi.org/10.6113/TKPE.2026.31.2.126" external>
-                Bidirectional On-State Voltage Measurement Circuit and Method with Enhanced Real-Time Capability for High-Voltage Power Semiconductor Devices
-              </Link>
-            </p>
-            <p class="text-sm" lang="en">
-              The Transactions of the Korean Institute of Power Electronics<br />
-              31(2), 126–134, 2026
-            </p>
-          </li>
-        </ul>
-      </section>
-
-      <section class="animate space-y-3" aria-labelledby="external-links-heading">
-        <h2 id="external-links-heading" class="text-lg font-semibold text-black dark:text-white">
-          External Links
-        </h2>
-        <ul class="list-disc pl-5">
-          {SOCIALS.map(social => (
-            <li>
-              <Link href={social.HREF} external aria-label={`${SITE.NAME} on ${social.NAME}`}>
-                {social.NAME}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </div>
+    <article class="home-content animate">
+      <HomeContent />
+    </article>
   </Container>
 </PageLayout>
+
+<style>
+  .home-content :global(p) {
+    @apply font-sans;
+  }
+
+  .home-content :global(h1) {
+    @apply mb-2 mt-0 text-3xl;
+  }
+
+  .home-content :global(h1 + p) {
+    @apply mt-0;
+  }
+
+  .home-content :global(h2) {
+    @apply mb-3 mt-10 text-lg;
+  }
+
+  .home-content :global(h3) {
+    @apply mb-0 mt-3 text-base;
+  }
+
+  .home-content :global(h3 + p) {
+    @apply mt-1;
+  }
+</style>
